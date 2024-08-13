@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-public class leetcode {
+public class leetcode2215 {
     public static void main(String[] args) {
         int nums1[]={1,2,3,3};
         int nums2[]={1,1,2,2};
