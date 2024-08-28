@@ -1,15 +1,30 @@
+import java.util.Stack;
+
 public class leetcode1047 {
     public static void main(String[] args) {
-        String s="abbaca";
+        String s="azxxzy";
         System.out.println(check( s));
     }
     static String check(String s){
-        StringBuilder sb=new StringBuilder(s);
-        for(int i=0;i<sb.length()-1;i++){
-            if(s.charAt(i)==s.charAt(i+1)){
-               sb.delete(i, i+2);
+        Stack<Character> st=new Stack<>();
+        for(int i=0;i<s.length();i++){
+            if(st.isEmpty()){
+                st.push(s.charAt(i));
             }
+            else if(st.peek()==s.charAt(i)){
+                st.pop();
+            }
+            else{
+                st.push(s.charAt(i));
+            } 
+            
         }
-        return sb.toString();
+       StringBuilder sb=new StringBuilder();
+       while(!st.isEmpty()){
+        sb.append(st.peek());
+        st.pop();
+       }
+       StringBuilder rev=sb.reverse();
+        return rev.toString();
     }
 }
