@@ -1,26 +1,43 @@
 public class leetcode767 {
     public static void main(String[] args) {
-        String s="abc";
+        String s="aaabcc";
         System.out.println(reorganizeString(s));
+       
     }
     static String reorganizeString(String s){
-        int j=1;
-        int i=0;
-        String ans="";
-        while(j<s.length()){
-          if(s.charAt(i)!=(s.charAt(j))){
-             ans=ans+s.charAt(i)+s.charAt(j);
-             i++;
-             j++;
-          }
-          else{
-            j++;
-          }
+      int freq[]=new int[26];
+      char arr[]=s.toCharArray();
+      for(int i=0;i<arr.length;i++){
+        freq[arr[i]-'a']++;
+      }
+      int max=0;
+      int letter=0;
+      for(int i=0;i<26;i++){
+        if(freq[i]>max){
+            max=freq[i];
+            letter=i;
         }
-        // ans=ans+s.charAt(i);
-        if(ans.length()==s.length()){
-            return ans;
-        }
+      }
+      if(max>(s.length()+1)/2){
         return "";
+      }
+      int idx=0;
+      char res[]=new char[s.length()];
+      while(freq[letter]>0){
+        res[idx]=(char)(letter+'a');
+        idx=idx+2;
+        freq[letter]--;
+      }
+      for(int i=0;i<26;i++){
+          while(freq[i]>0){
+            if(idx>=s.length()){
+                idx=1;
+            }
+            res[idx]=(char)(i+'a');
+            idx=idx+2;
+            freq[i]--;
+          }
+      }
+      return String.valueOf(res);
     }
 }
